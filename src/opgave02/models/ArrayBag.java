@@ -7,7 +7,9 @@ public class ArrayBag<E> implements Bag<E> {
     // items are at index 0..size-1
     private int size;
 
-    /** Create a bag with the given capacity. */
+    /**
+     * Create a bag with the given capacity.
+     */
     public ArrayBag(int capacity) {
         @SuppressWarnings("unchecked")
         E[] empty = (E[]) new Object[capacity];
@@ -15,7 +17,9 @@ public class ArrayBag<E> implements Bag<E> {
         size = 0;
     }
 
-    /** Create a bag with capacity 10. */
+    /**
+     * Create a bag with capacity 10.
+     */
     public ArrayBag() {
         this(10);
     }
@@ -37,42 +41,77 @@ public class ArrayBag<E> implements Bag<E> {
 
     @Override
     public boolean add(E newEntry) {
-        // TODO
+        if (!isFull()) {
+            items[size] = newEntry;
+            size++;
+            return true;
+        }
         return false;
     }
 
     @Override
     public E remove() {
-        // TODO
+        if (!isEmpty()) {
+            E removedItem = items[size - 1];
+            items[size] = null;
+            size--;
+            return removedItem;
+        }
         return null;
     }
 
     @Override
     public boolean remove(E anEntry) {
-        // TODO
+        if (isEmpty()) {
+            return false;
+        }
+        for (int i = 0; i < size - 1; i++) {
+            if (items[i].equals(anEntry)) {
+                items[i] = null;
+                size--;
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public void clear() {
-        // TODO
+        for (int i = 0; i < size; i++) {
+            items[i] = null;
+        }
+        size = 0;
     }
 
     @Override
     public int getFrequencyOf(E anEntry) {
-        // TODO
-        return 0;
+        int frequency = 0;
+        for (E item : items) {
+            if (item != null) {
+                if (item.equals(anEntry)) {
+                    frequency++;
+                }
+            }
+        }
+        return frequency;
     }
 
     @Override
     public boolean contains(E anEntry) {
-        // TODO
+        for (E item : items) {
+            if (item == anEntry) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public E[] toArray() {
-        // TODO
-        return null;
+        E[] array = (E[]) new Object[size];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = items[i];
+        }
+        return array;
     }
 }
