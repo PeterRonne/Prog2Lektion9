@@ -53,6 +53,6 @@ public interface Ring<T> {
     void map(Function<T, T> function);
 
     /** Returns a new Ring with thoose elements that satisfy the predicate*/
-    //Ring<T> where(Predicate<T> predicate);
+    Ring<T> where(Predicate<T> predicate);
 
 }

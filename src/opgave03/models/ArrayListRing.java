@@ -103,8 +103,14 @@ public class ArrayListRing<E> implements Ring<E> {
          currentItem = items.get(currentItemIndex);
      }
 
-    // @Override
-    // public Ring<T> where(Predicate<T> predicate) {
-    //     // Implementation
-    // }
+     @Override
+     public ArrayListRing<E> where(Predicate<E> predicate) {
+         ArrayListRing<E> ring = new ArrayListRing<E>();
+         for (E item : items) {
+             if (predicate.test(item)) {
+                 ring.add(item);
+             }
+         }
+         return ring;
+     }
 }

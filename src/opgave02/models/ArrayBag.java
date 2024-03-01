@@ -53,7 +53,7 @@ public class ArrayBag<E> implements Bag<E> {
     public E remove() {
         if (!isEmpty()) {
             E removedItem = items[size - 1];
-            items[size] = null;
+            items[size - 1] = null;
             size--;
             return removedItem;
         }
@@ -114,4 +114,6 @@ public class ArrayBag<E> implements Bag<E> {
         }
         return array;
     }
+
+
 }
